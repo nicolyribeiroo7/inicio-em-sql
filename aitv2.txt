@@ -1,0 +1,153 @@
+create database supermercado;
+use supermercado;
+
+create table fornecedores(
+id_fornecedor INT AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR(150) NOT NULL,
+telefone VARCHAR(20)
+);
+
+create table produtos(
+id_produto INT AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR(255) NOT NULL,
+id_fornecedor INT NOT NULL,
+categoria VARCHAR(50),
+preco DECIMAL(10,2) NOT NULL,
+quantidade_estoque INT DEFAULT 0,
+FOREIGN KEY (id_fornecedor) references fornecedores (id_fornecedor) on delete cascade
+);
+
+drop table produtos;
+
+insert into fornecedores (nome,telefone)
+values ('jurandir','1197279-4416');
+
+insert into fornecedores (nome,telefone)
+values ('napoleao','1197279-4416');
+
+insert into fornecedores (nome,telefone)
+values ('guilherme','1197279-4416');
+
+insert into fornecedores (nome,telefone)
+values ('raul','1197279-4416');
+
+insert into fornecedores (nome,telefone)
+values ('nicoly','1197279-4416');
+
+
+
+
+insert into produtos (nome,id_fornecedor,categoria,preco,quantidade_estoque)
+values ('cafe','1','alimento',30.0,'790');
+
+insert into produtos (nome,id_fornecedor,categoria,preco,quantidade_estoque)
+values ('arroz','1','alimento',30.0,'900');
+
+insert into produtos (nome,id_fornecedor,categoria,preco,quantidade_estoque)
+values ('salgadinho','1','alimento',3.0,'450');
+
+insert into produtos (nome,id_fornecedor,categoria,preco,quantidade_estoque)
+values ('suco','1','bebida',3.0,'350');
+
+insert into produtos (nome,id_fornecedor,categoria,preco,quantidade_estoque)
+values ('chocolate','1','alimento',10.0,'600');
+
+insert into produtos (nome,id_fornecedor,categoria,preco,quantidade_estoque)
+values ('bolacha','1','alimento',10.0,'3000');
+
+
+
+
+insert into produtos (nome,id_fornecedor,categoria,preco,quantidade_estoque)
+values ('nutella','2','alimento',30.0,'500');
+
+insert into produtos (nome,id_fornecedor,categoria,preco,quantidade_estoque)
+values ('feijao','2','alimento',15.0,'3500');
+
+insert into produtos (nome,id_fornecedor,categoria,preco,quantidade_estoque)
+values ('refrigerante','2','bebida',10.0,'450');
+
+insert into produtos (nome,id_fornecedor,categoria,preco,quantidade_estoque)
+values ('sal','2','alimento',6.0,'3000');
+
+insert into produtos (nome,id_fornecedor,categoria,preco,quantidade_estoque)
+values ('ovo','2','alimento',15.0,'1000');
+
+insert into produtos (nome,id_fornecedor,categoria,preco,quantidade_estoque)
+values ('bolacha','2','alimento',10.0,'3000');
+
+
+
+insert into produtos (nome,id_fornecedor,categoria,preco,quantidade_estoque)
+values ('bolo','3','alimento',30.0,'650');
+
+insert into produtos (nome,id_fornecedor,categoria,preco,quantidade_estoque)
+values ('pao','3','alimento',15.0,'300');
+
+insert into produtos (nome,id_fornecedor,categoria,preco,quantidade_estoque)
+values ('presunto','3','alimento',10.0,'3500');
+
+insert into produtos (nome,id_fornecedor,categoria,preco,quantidade_estoque)
+values ('cookie','3','alimento',6.0,'300');
+
+insert into produtos (nome,id_fornecedor,categoria,preco,quantidade_estoque)
+values ('agua','3','bebida',2.0,'2000');
+
+insert into produtos (nome,id_fornecedor,categoria,preco,quantidade_estoque)
+values ('aromatizador','3','alimento',10.0,'500');
+
+
+
+insert into produtos (nome,id_fornecedor,categoria,preco,quantidade_estoque)
+values ('batatapalha','4','alimento',10.0,'3500');
+
+insert into produtos (nome,id_fornecedor,categoria,preco,quantidade_estoque)
+values ('fini','4','alimento',10.0,'450');
+
+insert into produtos (nome,id_fornecedor,categoria,preco,quantidade_estoque)
+values ('alface','4','alimento',8.0,'3500');
+
+insert into produtos (nome,id_fornecedor,categoria,preco,quantidade_estoque)
+values ('farofa','4','alimento',6.0,'3000');
+
+insert into produtos (nome,id_fornecedor,categoria,preco,quantidade_estoque)
+values ('nuggets','4','alimento',20.0,'500');
+
+insert into produtos (nome,id_fornecedor,categoria,preco,quantidade_estoque)
+values ('shampoo','4','alimento',20.0,'400');
+
+
+
+
+insert into produtos (nome,id_fornecedor,categoria,preco,quantidade_estoque)
+values ('macarrao','5','alimento',15.0,'3500');
+
+insert into produtos (nome,id_fornecedor,categoria,preco,quantidade_estoque)
+values ('cerveja','5','bebida',9.0,'4000');
+
+insert into produtos (nome,id_fornecedor,categoria,preco,quantidade_estoque)
+values ('oleo','5','alimento',10.0,'3000');
+
+insert into produtos (nome,id_fornecedor,categoria,preco,quantidade_estoque)
+values ('maionese','5','alimento',6.0,'3500');
+
+insert into produtos (nome,id_fornecedor,categoria,preco,quantidade_estoque)
+values ('iogurte','5','bebida',15.0,'1000');
+
+insert into produtos (nome,id_fornecedor,categoria,preco,quantidade_estoque)
+values ('sorvete','5','alimento',18.0,'100');
+
+
+update produtos
+set preco='10.00'
+where id_produto=5;
+
+delete from fornecedores 
+where id_fornecedor=1;
+
+select * from produtos
+where categoria= 'alimento';
+
+select nome,quantidade_estoque,categoria, preco*quantidade_estoque from produtos;
+
+select*from produtos where quantidade_estoque<400;

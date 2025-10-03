@@ -1,0 +1,180 @@
+create table pessoa(
+idpessoa int auto_increment primary key,
+endereco varchar(50),
+email varchar(30),
+telefone int,
+habilitado char(3),
+observacoes varchar(100),
+datacadastro date
+);
+
+create table cliente(
+idcliente int auto_increment primary key,
+idclientefisico int,
+idpessoa int,
+idclientejuridico int,
+idusuario int,
+FOREIGN KEY (idclientefisico) REFERENCES cliente_fisico (idclientefisico),
+FOREIGN KEY (idpessoa) REFERENCES tabela_pessoa (idpessoa),
+FOREIGN KEY (idclientejuridico) REFERENCES cliente_juridico (idclientejuridico),
+FOREIGN KEY (idusuario) REFERENCES usuario (idusuario)
+);
+
+create table cliente_fisico(
+idclientefisico int auto_increment primary key,
+nome varchar(50),
+apelido varchar(20),
+sexo varchar(9),
+cpf char (14),
+rg char(12),
+datanascimento date
+);
+
+create table cliente_juridico(
+idclientejuridico int auto_increment primary key,
+razaosocial int,
+nomefantasia varchar(30),
+cnpj char(20),
+ie varchar(20),
+im varchar(50)
+);
+
+create table usuario(
+idusuario int auto_increment primary key,
+nome varchar(80),
+apelido varchar(20),
+sexo varchar(9),
+cpf char(14),
+rg char(12),
+datanascimento date,
+login varchar(50),
+senha varchar(20),
+cargo varchar(30),
+nivelacesso varchar(30)
+);
+
+create table compra(
+idcompra int auto_increment primary key,
+datacompra date,
+precototal decimal(10,0),
+idpessoa int,
+FOREIGN KEY (idpessoa) REFERENCES tabela_pessoa (idpessoa)
+);
+
+create table venda(
+idvenda int auto_increment primary key,
+datavenda int,
+precovenda decimal(10,0),
+desconto decimal(10,0),
+precototal decimal(10,0),
+idcliente int,
+FOREIGN KEY (idcliente) references cliente (idcliente)
+);
+
+create table itens_comprados(
+iditemcomprado int auto_increment primary key,
+preçocompra decimal(10,2),
+qtd int,
+idpeca int,
+FOREIGN KEY (idpeca) references peca (idpeca)
+);
+
+create table itens_vendidos(
+iditemvendido int auto_increment primary key,
+precovendido decimal (10,2),
+qtd int,
+idvenda int,
+FOREIGN KEY (idvenda) references venda (idvenda)
+);
+
+create table peca(
+idpeca int auto_increment primary key,
+descricao varchar(200),
+unidademedida int,
+grupo varchar(50),
+subgrupo varchar(50),
+precocusto decimal(10,2),
+precovenda decimal(10,2)
+);
+
+create table fornecedor(
+idpessoajuridica int auto_increment primary key,
+razaosocial varchar(30),
+nomefantasia varchar(30),
+cnpj varchar (20),
+im varchar(50),
+ie varchar(50)
+);
+
+create table estoque(
+idmovimento int auto_increment primary key,
+qtdmovimento int,
+tipomovimento varchar(30),
+saldo decimal (10,2)
+);
+
+
+biblioteca
+create database biblioteca;
+use biblioteca;
+
+create table biblioteca(
+idcliente int auto_increment primary key,
+email varchar(20),
+telefone char(20),
+endereço varchar (50),
+nome varchar(30),
+cpf int,
+cnpj int,
+FOREIGN KEY (cpf) references pessoa_fisica (cpf),
+FOREIGN KEY (cnpj) references pessoa_juridica (cnpj)
+);
+
+create table pedido(
+idpedido int auto_increment primary key,
+data date,
+valor decimal(10,2),
+idcliente int,
+ISBN int,
+FOREIGN KEY (idcliente) references biblioteca (idcliente),
+FOREIGN KEY (ISBN) references livro (ISBN)
+);
+
+create table estoque(
+idlivro int auto_increment primary key,
+ideditora int,
+qtdestoque int,
+FOREIGN KEY (ideditora) references editora (ideditora)
+);
+
+create table pessoa_juridica(
+cnpj int auto_increment primary key,
+ie char (30)
+);
+
+create table livro(
+titulo varchar(60),
+categoria varchar(30),
+ISBN int primary key,
+ano date,
+valor decimal(10,2),
+editora varchar (30),
+autor varchar(30),
+ideditora int,
+FOREIGN KEY (ideditora) references editora (ideditora)
+);
+
+create table editora(
+ideditora int auto_increment primary key,
+telefone_editora char (15),
+email varchar (30),
+contato char(15),
+telefone_contato varchar(20)
+);
+
+create table pessoa_fisica(
+cpf int auto_increment primary key,
+rg char(12)
+);
+
+
